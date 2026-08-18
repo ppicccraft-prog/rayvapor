@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Papa from 'papaparse';
+import { apiFetch } from '../../utils/apiFetch';
 import { Loader2, AlertCircle, TrendingUp, TrendingDown, Store, Download, Share2, FileText, Send, Mail, CheckCircle, CheckSquare } from 'lucide-react';
 
 interface LakuItem {
@@ -57,7 +58,7 @@ export function BiLiquid({ dataAnalisa }: BiLiquidProps) {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/bi_liquid');
+      const response = await apiFetch('/api/bi_liquid');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }

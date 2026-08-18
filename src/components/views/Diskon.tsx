@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Papa from 'papaparse';
+import { apiFetch } from '../../utils/apiFetch';
 import { RequestItem, saveRequest } from '../../lib/requestStore';
 import { Search, Loader2, AlertCircle, TrendingDown, TrendingUp, Package, Download, Percent, CheckSquare, FileText, Send, Mail, CheckCircle, ArrowUpDown, ArrowUp, ArrowDown, RotateCcw } from 'lucide-react';
 
@@ -81,7 +82,7 @@ export function Diskon({ role = 'Direksi' }: { role?: string }) {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/diskon');
+      const response = await apiFetch('/api/diskon');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }

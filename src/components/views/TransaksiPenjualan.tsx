@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Papa from 'papaparse';
+import { apiFetch } from '../../utils/apiFetch';
 import { Loader2, AlertCircle, TrendingUp, Search, Filter, ArrowDownUp, Activity, Box, Clock, AlertTriangle } from 'lucide-react';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, Cell,
@@ -77,7 +78,7 @@ export function TransaksiPenjualan({ dataAnalisa }: TransaksiPenjualanProps) {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/penjualan');
+      const response = await apiFetch('/api/penjualan');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }

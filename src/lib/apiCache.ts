@@ -1,4 +1,5 @@
 import Papa from 'papaparse';
+import { apiFetch } from '../utils/apiFetch';
 
 const cache: Record<string, any> = {};
 
@@ -7,7 +8,7 @@ export const fetchCsvData = async (url: string, options: Papa.ParseConfig = {}):
     return cache[url];
   }
 
-  const response = await fetch(url);
+  const response = await apiFetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch data from ${url}`);
   }

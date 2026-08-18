@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect, useDeferredValue } from 'react';
 import Papa from 'papaparse';
+import { apiFetch } from '../../utils/apiFetch';
 import { Search, Filter, ArrowDownUp, PackageSearch, BarChart3, AlertCircle, Loader2 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Cell } from 'recharts';
 
@@ -27,7 +28,7 @@ export function DeadStock() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/dead_stock');
+      const response = await apiFetch('/api/dead_stock');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }

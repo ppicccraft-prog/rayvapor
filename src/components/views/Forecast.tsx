@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Papa from 'papaparse';
+import { apiFetch } from '../../utils/apiFetch';
 import { RequestItem, saveRequest } from '../../lib/requestStore';
 import { Search, Loader2, AlertCircle, TrendingDown, TrendingUp, Package, Download, LineChart, ArrowUpDown, ArrowUp, ArrowDown, CheckSquare, FileText, Send, Mail, CheckCircle } from 'lucide-react';
 
@@ -53,8 +54,8 @@ export function Forecast({ role = 'Direksi' }: { role?: string }) {
     setError(null);
     try {
       const [forecastRes, analisaRes] = await Promise.all([
-        fetch('/api/forecast'),
-        fetch('/api/analisa-sku')
+        apiFetch('/api/forecast'),
+        apiFetch('/api/analisa-sku')
       ]);
       
       if (!forecastRes.ok || !analisaRes.ok) {

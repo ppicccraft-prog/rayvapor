@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
+import { apiFetch } from '../../utils/apiFetch';
 import { Loader2, AlertCircle, Settings, Calendar, Database, Tags, Info } from 'lucide-react';
 
 interface ParamItem {
@@ -25,7 +26,7 @@ export function Parameter() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/parameter');
+      const response = await apiFetch('/api/parameter');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }

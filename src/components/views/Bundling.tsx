@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Papa from 'papaparse';
+import { apiFetch } from '../../utils/apiFetch';
 import { Search, Loader2, AlertCircle, TrendingDown, TrendingUp, Package, Download, PackagePlus, ArrowDownUp, Filter } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip, Legend } from 'recharts';
 
@@ -59,7 +60,7 @@ export function Bundling({ role = 'Direksi' }: { role?: string }) {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/bundling');
+      const response = await apiFetch('/api/bundling');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }

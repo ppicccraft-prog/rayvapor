@@ -6,6 +6,7 @@ import { LoginScreen } from './components/LoginScreen';
 import { Loader2, AlertCircle, Database, Shield, Menu, X, RefreshCw, LogOut, Moon, Sun } from 'lucide-react';
 import { Role, DEFAULT_ROLE_ACCESS } from './roles';
 import { logActivity } from './lib/activityLog';
+import { apiFetch } from './utils/apiFetch';
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -158,7 +159,7 @@ export default function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/sheets');
+      const response = await apiFetch('/api/sheets');
       if (!response.ok) {
         throw new Error('Failed to fetch data from server');
       }

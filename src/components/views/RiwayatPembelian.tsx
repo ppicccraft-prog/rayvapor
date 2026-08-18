@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Papa from 'papaparse';
+import { apiFetch } from '../../utils/apiFetch';
 import { Loader2, AlertCircle, ShoppingCart, Search, Filter, ArrowDownUp, TrendingUp, TrendingDown, Package, Activity } from 'lucide-react';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, Cell,
@@ -70,7 +71,7 @@ export function RiwayatPembelian({ dataAnalisa }: RiwayatPembelianProps) {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/pembelian');
+      const response = await apiFetch('/api/pembelian');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }

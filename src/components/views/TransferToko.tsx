@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Papa from 'papaparse';
+import { apiFetch } from '../../utils/apiFetch';
 import { ArrowRightLeft, Search, Loader2, AlertCircle, TrendingDown, TrendingUp, Package, Download, Filter, ArrowDownUp } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip, Legend } from 'recharts';
 
@@ -24,7 +25,7 @@ export function TransferToko() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/transfer_toko');
+      const response = await apiFetch('/api/transfer_toko');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Papa from 'papaparse';
+import { apiFetch } from '../../utils/apiFetch';
 import { Loader2, TrendingUp, Zap, PackagePlus, ArrowRightLeft, Percent, AlertCircle } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 
@@ -15,10 +16,10 @@ export function OverviewRekomendasi() {
       if (cachedMetrics) { setMetrics(cachedMetrics); setLoading(false); return; }
       try {
         const [resTransfer, resBundling, resDiskon, resForecast] = await Promise.all([
-          fetch('/api/transfer_toko'),
-          fetch('/api/bundling'),
-          fetch('/api/diskon'),
-          fetch('/api/forecast')
+          apiFetch('/api/transfer_toko'),
+          apiFetch('/api/bundling'),
+          apiFetch('/api/diskon'),
+          apiFetch('/api/forecast')
         ]);
 
         const [textTransfer, textBundling, textDiskon, textForecast] = await Promise.all([

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Papa from 'papaparse';
+import { apiFetch } from '../../utils/apiFetch';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer,
   LineChart, Line, Legend
@@ -29,7 +30,7 @@ export function ScorecardBulanan() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/scorecard_bulanan');
+      const response = await apiFetch('/api/scorecard_bulanan');
       if (!response.ok) {
         throw new Error('Failed to fetch data from server');
       }
