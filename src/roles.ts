@@ -35,9 +35,9 @@ export const DEFAULT_ROLE_ACCESS: Record<Role, string[]> = {
 };
 
 export const DEFAULT_ROLE_PASSWORDS: Record<Role, string> = {
-  Direksi: 'direksi123',
-  'Head (SPV)': 'head123',
-  Staff: 'staff123',
-  Vaporista: 'vaporista123'
+  Direksi: '12345',
+  'Head (SPV)': '12345',
+  Staff: '12345',
+  Vaporista: '12345'
 };
 

@@ -13,14 +13,11 @@ export function LoginScreen({ onLogin }: LoginScreenProps) {
   const [passwordsConfig, setPasswordsConfig] = useState<Record<Role, string>>(DEFAULT_ROLE_PASSWORDS);
 
   useEffect(() => {
-    const savedPasswords = localStorage.getItem('rolePasswords');
-    if (savedPasswords) {
-      try {
-        setPasswordsConfig(JSON.parse(savedPasswords));
-      } catch (e) {
-        console.error("Failed to parse passwords", e);
-      }
-    }
+    // Force reset all role passwords to 12345 and restore default role access configs
+    localStorage.setItem('rolePasswords', JSON.stringify(DEFAULT_ROLE_PASSWORDS));
+    localStorage.removeItem('roleAccess');
+    setPasswordsConfig(DEFAULT_ROLE_PASSWORDS);
+    window.dispatchEvent(new Event('roleAccessUpdated'));
   }, []);
 
   const roles: { id: Role; title: string; desc: string }[] = [
@@ -99,18 +96,7 @@ export function LoginScreen({ onLogin }: LoginScreenProps) {
               {error && (
                 <p className="text-red-500 text-xs mt-2 font-medium">{error}</p>
               )}
-              <div className="mt-3 text-right">
-                <button
-                  type="button"
-                  onClick={() => {
-                    const defaultPass = DEFAULT_ROLE_PASSWORDS[selectedRole];
-                    alert(`Password default untuk ${selectedRole} adalah: ${defaultPass}`);
-                  }}
-                  className="text-xs text-indigo-600 hover:text-indigo-800 font-medium underline"
-                >
-                  Lupa password? Lihat password default
-                </button>
-              </div>
+
             </div>
             <div className="flex gap-3">
               <button

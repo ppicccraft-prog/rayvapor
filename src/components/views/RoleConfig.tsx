@@ -9,31 +9,9 @@ export function RoleConfig() {
   const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
-    const savedAccess = localStorage.getItem('roleAccess');
-    if (savedAccess) {
-      try {
-        const parsed = JSON.parse(savedAccess);
-        const merged = { ...DEFAULT_ROLE_ACCESS };
-        (Object.keys(parsed) as Role[]).forEach(role => {
-          if (merged[role]) {
-            const prevAccess = Array.isArray(parsed[role]) ? parsed[role] : [];
-            const defaultExtras = DEFAULT_ROLE_ACCESS[role].filter(m => m === 'dashboard_request' || m === 'request_barang');
-            merged[role] = Array.from(new Set([...prevAccess, ...defaultExtras]));
-          }
-        });
-        setRoleAccess(merged);
-      } catch (e) {
-        console.error("Failed to parse role access", e);
-      }
-    }
-    const savedPasswords = localStorage.getItem('rolePasswords');
-    if (savedPasswords) {
-      try {
-        setRolePasswords(JSON.parse(savedPasswords));
-      } catch (e) {
-        console.error("Failed to parse role passwords", e);
-      }
-    }
+    // Reset to synchronized defaults to ensure no restriction blocks remain
+    setRoleAccess(DEFAULT_ROLE_ACCESS);
+    setRolePasswords(DEFAULT_ROLE_PASSWORDS);
   }, []);
 
   const handleToggleAccess = (role: Role, menuId: string) => {
